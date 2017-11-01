@@ -1,23 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards_all = [];
-cards_all[0] = 'fa-diamond',
-cards_all[1] = 'fa-paper-plane-o',
-cards_all[2] = 'fa-anchor',
-cards_all[3] = 'fa-bolt',
-cards_all[4] = 'fa-cube',
-cards_all[5] = 'fa-leaf',
-cards_all[6] = 'fa-bicycle',
-cards_all[7] = 'fa-bomb',
-cards_all[8] = 'fa-diamond',
-cards_all[9] = 'fa-paper-plane-o',
-cards_all[10] = 'fa-anchor',
-cards_all[11] = 'fa-bolt',
-cards_all[12] = 'fa-cube',
-cards_all[13] = 'fa-leaf',
-cards_all[14] = 'fa-bicycle',
-cards_all[15] = 'fa-bomb';
+var cards_all = ['fa-diamond','fa-diamond',
+'fa-paper-plane-o','fa-paper-plane-o',
+'fa-anchor','fa-anchor',
+'fa-bolt','fa-bolt',
+'fa-cube','fa-cube',
+'fa-leaf','fa-leaf',
+'fa-bicycle','fa-bicycle',
+'fa-bomb','fa-bomb'];
 
 /*
  * Display the cards on the page
@@ -129,9 +120,13 @@ for(var i =0;i<card.length;i++){
 	(function(n){
 		var handler = function(){
 			cId.push(n);//翻开的卡牌索引
+			console.log(cId);
 			if(cId[0] != cId[1]){//两次点击不能是同一个
+				console.log(cId);
+				console.log(match_card);
 				display_symbol(n);//展示卡牌
-				add_open_list(n);//添加到打开的卡牌数组中
+				add_open_list(n);
+				console.log(open_card);
 			}else{
 				cId.pop();
 			}
