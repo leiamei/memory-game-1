@@ -136,7 +136,6 @@ for(var i =0;i<card.length;i++){
 			if(open_card.length == 2){//打开的卡牌数组长度是2时
 				check_match();//看匹配情况
 				counter += 1;
-				console.log(n);
 				for(var j=0;j<match_card.length;j++){//match_card是匹配的卡牌索引数组，现要取消匹配的卡牌的点击事件
 					var mid = match_card[j];
 					card[mid].removeEventListener("click",handler,false);
