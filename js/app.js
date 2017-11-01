@@ -139,9 +139,7 @@ for(var i =0;i<card.length;i++){
 				console.log(n);
 				for(var j=0;j<match_card.length;j++){//match_card是匹配的卡牌索引数组，现要取消匹配的卡牌的点击事件
 					var mid = match_card[j];
-					console.log(mid);
 					card[mid].removeEventListener("click",handler,false);
-					console.log(mid);
 				}
 				cId.splice(0,cId.length);//翻开的卡牌索引数组清空
 			}
