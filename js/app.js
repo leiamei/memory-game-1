@@ -70,7 +70,9 @@ function lock(){
 	for(var i=0;i<2;i++){
 		var card_lock = open_card[i].parentNode;
 		card_lock.className = "card match";
+		//console.log(open_card+'打开的卡牌是');
 		match_card.push(cId[i]);//匹配的卡牌获得索引
+		console.log('匹配的卡牌是'+match_card);
 	}
 }
 function remove_hide(){
@@ -137,8 +139,14 @@ for(var i =0;i<card.length;i++){
 				check_match();//看匹配情况
 				counter += 1;
 				for(var j=0;j<match_card.length;j++){//match_card是匹配的卡牌索引数组，现要取消匹配的卡牌的点击事件
-					var mid = match_card[j];
-					card[mid].removeEventListener("click",handler,false);
+				console.log('要取消的索引是'+match_card[j]);
+					(function (m){
+						var mid = match_card[m];
+						card[mid].removeEventListener("click",handler,false);
+						console.log('取消了'+mid+'的点击事件');
+					})(j)
+					/*var mid = match_card[j];
+					card[mid].removeEventListener("click",handler,false);*/
 				}
 				cId.splice(0,cId.length);//翻开的卡牌索引数组清空
 			}
