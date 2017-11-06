@@ -82,7 +82,7 @@ h1 {
 }
 .deck .card.notm{
 	cursor: default;
-	background: #EC4C3E;
+	background: #ec4c3e;
 	font-size: 33px;
 }
 
@@ -97,7 +97,6 @@ h1 {
 }
 
 .score-panel .stars {
-    margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
@@ -111,4 +110,32 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.result{
+	width: 500px;
+	height: 500px;
+	margin: -150px auto 0;
+	text-align: center;
+	position: relative;
+	top: 50%;
+}
+.re-won{
+	font-size: 30px;
+	font-weight: 600;
+}
+.re-moves{
+	color: gray;
+	font-size: 22px;
+}
+.re-button{
+	background-color: #0ed0a5;
+	border-radius: 5px;
+	width: 150px;
+    height: 40px;
+	text-align: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 40px;
+    margin: 0 auto;
 }

@@ -85,28 +85,49 @@ function check_match(){
 	var o2 = open_card[1].className;
 	if (o1 == o2){
 		lock();
-		open_card.splice(0,open_card.length);
+		//open_card.splice(0,open_card.length);
 	}else{
 		remove_hide();
-		open_card.splice(0,open_card.length);
 	}
-	
+    open_card.splice(0,open_card.length);
 	display_counter();
+	console.log(match_card.length);
 	if (match_card.length == 16){
 		Message();
 	}
 }
 function display_counter(){
+	counter += 1;
+	document.getElementsByClassName('moves')[0].innerHTML = counter;
 }
 function Message(){
-	var fragment = document.createDocumentFragment();
-	var html = document.getElementsByClassName("container");
-	var info = document.createElement("p");
-	info.innerHTML("Congratulations! You Won!"+' \n '+"With 17 Moves and 1 Stars."+' \n '+'Woooooo!');
-	html.appendChild(info);
-	var info_button = document.createElement("input");
-	info_button.type = 'button';
-	info_button.value = "Play again!";
+	var original = document.getElementsByClassName("container")[0];
+	console.log(original);
+	original.parentNode.removeChild(original);
+	var html = document.createElement('div');
+	html.className = 'result';
+	var info1 = document.createElement("p");
+	var info2 = document.createElement("p");
+	var info3 = document.createElement("p");
+	info1.innerHTML="Congratulations! You Won!";
+	info1.className = 're-won';
+	info2.innerHTML="With "+display_counter()+" Moves and "+" Stars.";
+	info2.className = 're-moves';
+	info3.innerHTML="Woooooo!";
+	info3.className = 're-moves';
+	
+	html.appendChild(info1);
+	html.appendChild(info2);
+	html.appendChild(info3);
+	
+	var info_button = document.createElement("button");
+	var span_button = document.createElement("span");
+	span_button.innerHTML = 'Play again!';
+	
+	info_button.appendChild(span_button);
+	info_button.className="re-button";
+	html.appendChild(info_button);
+	document.body.appendChild(html);
 }
 
 
@@ -116,36 +137,60 @@ var match_card = [];//匹配的卡牌数组，长度在增加
 var counter = 0;//计步
 var cId = [];//控制每次翻开的卡牌不能是同一张
 
-for(var i =0;i<card.length;i++){
-	(function(n){
-		var handler = function(){
-			cId.push(n);//翻开的卡牌索引
-			console.log(cId);
-			if(cId[0] != cId[1]){//两次点击不能是同一个
-				console.log(cId);
-				console.log(match_card);
-				display_symbol(n);//展示卡牌
-				add_open_list(n);
-				console.log(open_card);
-			}else{
-				cId.pop();
-			}
-			if(open_card.length == 2){//打开的卡牌数组长度是2时
-				check_match();//看匹配情况
-				counter += 1;
-				for(var j=0;j<match_card.length;j++){//match_card是匹配的卡牌索引数组，现要取消匹配的卡牌的点击事件
-				console.log('要取消的索引是'+match_card[j]);
-					(function (m){
-						var mid = match_card[m];
-						card[mid].removeEventListener("click",handler,false);
-						console.log('取消了'+mid+'的点击事件');
-					})(j)
-					/*var mid = match_card[j];
-					card[mid].removeEventListener("click",handler,false);*/
-				}
-				cId.splice(0,cId.length);//翻开的卡牌索引数组清空
-			}
+/*for(var i =0;i<card.length;i++){
+	(function(n){*/
+var handler = function(){
+	var n = this.dataset.index;
+	console.log(n+'dataset.index');
+	cId.push(n);//翻开的卡牌索引
+	console.log(cId);
+	if(cId[0] != cId[1]){//两次点击不能是同一个
+		console.log(cId);
+		console.log(match_card);
+		display_symbol(n);//展示卡牌
+		add_open_list(n);
+		console.log(open_card);
+	}else{
+		cId.pop();
+	}
+	if(open_card.length == 2){//打开的卡牌数组长度是2时
+		check_match();//看匹配情况
+		for(var j=0;j<match_card.length;j++){//match_card是匹配的卡牌索引数组，现要取消匹配的卡牌的点击事件
+			//console.log('要取消的索引是'+match_card[j]);
+			(function (m){
+				var mid = match_card[m];
+				console.log(mid);
+				card[mid].removeEventListener("click",handler,false);
+				//console.log('取消了'+mid+'的点击事件');
+			})(j)
 		}
-		card[n].addEventListener("click",handler,false);//为每张卡牌设置点击事件
+		cId.splice(0,cId.length);//翻开的卡牌索引数组清空
+	}
+}
+for(var n = 0;n<card.length;n++){
+	card[n].dataset['index'] = n;
+	card[n].addEventListener("click",handler,false);
+}
+/*card[n].addEventListener("click",handler,false);//为每张卡牌设置点击事件
 	})(i)
+}*/
+/*星星评分*/
+/*重置和刷新*/
+var restart_botton = document.getElementsByClassName("restart")[0];
+console.log(restart_botton);
+restart_botton.addEventListener("click",restart,false);
+
+var restart=function(){
+	console.log('restart');
+	shuffle(cards_all);
+	//console.log(cards_all);
+	var str = '';
+	for (var i = 0; i<=cards_all.length;i++){
+		str += '<li class = \"card\"><i class=\"fa '+cards_all[i]+'\"></i></li>';
+	}
+	document.getElementsByClassName("deck").innerHTML = str;
+	for(var n = 0;n<card.length;n++){
+		card[n].dataset['index'] = n;
+		card[n].addEventListener("click",handler,false);
+	}
 }
