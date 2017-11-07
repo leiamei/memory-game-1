@@ -40,7 +40,10 @@ function displaySymbol(index) {
  * @param counter
  * @param startnum
  */
-function checkMatch(openCard,matchlength,counter,startnum) {
+function checkMatch(openCard,matchlength,counter,startnum,clearid,bsDate) {
+    var date = new Date(bsDate);
+    console.log(date);
+    var second;
     var card1 = $('.card')[openCard[0]].children[0].className;
     var card2 = $('.card')[openCard[1]].children[0].className;
     if(card1==card2){
@@ -51,7 +54,10 @@ function checkMatch(openCard,matchlength,counter,startnum) {
         removeCard(openCard);
     }
     if(matchlength.length === 16){
-        addMessage(counter,startnum);
+        second = seconds(date);
+        console.log(second+'得到的秒数是');
+        addMessage(counter,startnum,second);
+        clearTimeout(clearid);
     }
 }
 
@@ -60,11 +66,11 @@ function checkMatch(openCard,matchlength,counter,startnum) {
  * @param counter
  * @param startnum
  */
-function addMessage(counter,startnum) {
+function addMessage(counter,startnum,second) {
     $('.container').remove();
     var html = $('<div class="result"></div>');
     var info1 = $('<p class="re-won">Congratulations! You Won!</p>');
-    var info2 = $('<p class="re-moves">With'+counter+' Moves and '+startnum+' Stars. </p>');
+    var info2 = $('<p class="re-moves">With'+counter+' Moves and '+second+'seconds'+startnum+' Stars. </p>');
     var info3 = $('<p class="re-moves">Woooooo!</p>');
     var button = $('<p class="re-button">Play again!</p>');
     html.append(info1);
@@ -143,8 +149,16 @@ function play() {
     var matchlength = [];//all the matched card, length is increase
     var counter = 0;//counter the pace
     var startnum;
+    var time = true;
+    var clearid;
     //bind the click for each li
     $(".card").bind("click",function () {
+        if(time){
+            var beDate = new Date();
+            console.log(beDate+'定义时');
+            clearid=timer(0);
+            time = false;
+        }
         var n = $('.card').index(this);
         openCard.push(n);
         if (openCard[0]!=openCard[1]) {
@@ -156,9 +170,10 @@ function play() {
             counter += 1;
             displayNum(counter);
             startnum = displayStar(counter);
-            checkMatch(openCard,matchlength,counter,startnum);
+            checkMatch(openCard,matchlength,counter,startnum,clearid,beDate);
             openCard.splice(0,openCard.length);
         }
+
     })
 }
 
@@ -172,6 +187,32 @@ function restart(classname) {
     })
 }
 
+function interval(func, wait) {
+    var id;
+    var interv = function () {
+        func.call(null);
+        id = setTimeout(interv, wait);
+    };
+    id = setTimeout(interv ,wait);
+    return id;
+}
+
+function timer(i) {
+    var id = interval(function () {
+        i++;
+        $('.time span').text("").append(i);
+    },1000);
+    return id;
+}
+
+function seconds(bsDate) {
+    console.log(bsDate+'传进seconds的参数');
+    var date = new Date();
+    console.log(date+'结束时的时间');
+    var second = Math.floor((bsDate.getTime() - date.getTime())/1000);
+    console.log(second+'计算的秒数是');
+    return second;
+}
 $(document).ready(function () {
     var cards_all = [
         'fa-diamond','fa-diamond',
