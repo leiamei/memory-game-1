@@ -98,7 +98,7 @@ function lockCard($card,openCard) {
     })
     $.each($card,function (index) {
         for(var j=0;j<match.length;j++) {
-            if(i == match[j]){
+            if(index == match[j]){
                 let cancel = $card[index];
                 $(cancel).unbind("click");
             }
