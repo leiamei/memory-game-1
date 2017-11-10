@@ -1,9 +1,3 @@
-/*p.p1 {
- margin: 0;
- font: 16.0px Consolas;
- color: #a5b2b9
-}p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; min-height: 19.0px}p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #596972}p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #b58a00}p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #2eafa9}p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #da6c34}p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #ad5cff}p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #97a700}p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #3c7400}p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #596972; min-height: 19.0px}p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Consolas; color: #6b82d9}span.s1 {color: #596972}span.s2 {color: #6b82d9}span.s3 {color: #97a700}span.s4 {color: #b58a00}span.s5 {color: #ad5cff}span.s6 {color: #3c7400}span.s7 {color: #000000}span.s8 {color: #2eafa9}span.s9 {color: #d8a100}span.Apple-tab-span {white-space:pre}
-
 /**
  * jQuery.timers - Timer abstractions for jQuery
  * Written by Blair Mitchelmore (blair DOT mitchelmore AT gmail DOT com)

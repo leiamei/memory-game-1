@@ -1,10 +1,11 @@
+'use strict';
 /**
  * @description random array
  * @param array
  * @returns {*}
  */
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0){
         randomIndex = Math.floor(Math.random()*currentIndex);
         currentIndex -= 1;
@@ -17,20 +18,22 @@ function shuffle(array) {
 
 /**
  * @description append classname to 'i'
+ * @param $card
  * @param cards_all
  */
-function addDOM(cards_all) {
-    $('.deck li').each(function (i) {
+function addDOM($card,cards_all) {
+    $card.each(function (i) {
         $(this).find('.fa').addClass(cards_all[i]);
     });
 }
 
 /**
  * @description display the symbol of click card
+ * @param $card
  * @param index
  */
-function displaySymbol(index) {
-    $('.card')[index].className += ' open show';
+function displaySymbol($card,index) {
+    $card[index].className += ' open show';
 }
 
 /**
@@ -39,23 +42,23 @@ function displaySymbol(index) {
  * @param matchlength
  * @param counter
  * @param startnum
+ * @param clearid
+ * @param mydate
+ * @param $card
  */
-function checkMatch(openCard,matchlength,counter,startnum,clearid,bsDate) {
-    var date = new Date(bsDate);
-    console.log(date);
-    var second;
-    var card1 = $('.card')[openCard[0]].children[0].className;
-    var card2 = $('.card')[openCard[1]].children[0].className;
-    if(card1==card2){
-        lockCard(openCard);
+function checkMatch(openCard,matchlength,counter,startnum,clearid,mydate,$card) {
+    let second;
+    let card1 = $card[openCard[0]].children[0].className;
+    let card2 = $card[openCard[1]].children[0].className;
+    if(card1 === card2){
+        lockCard($card,openCard);
         matchlength.push(openCard[0]);
         matchlength.push(openCard[1]);
     }else {
-        removeCard(openCard);
+        removeCard($card,openCard);
     }
     if(matchlength.length === 16){
-        second = seconds(date);
-        console.log(second+'得到的秒数是');
+        second = seconds(mydate);
         addMessage(counter,startnum,second);
         clearTimeout(clearid);
     }
@@ -65,14 +68,15 @@ function checkMatch(openCard,matchlength,counter,startnum,clearid,bsDate) {
  * @description display the information when player is win
  * @param counter
  * @param startnum
+ * @param second
  */
 function addMessage(counter,startnum,second) {
     $('.container').remove();
-    var html = $('<div class="result"></div>');
-    var info1 = $('<p class="re-won">Congratulations! You Won!</p>');
-    var info2 = $('<p class="re-moves">With'+counter+' Moves and '+second+'seconds'+startnum+' Stars. </p>');
-    var info3 = $('<p class="re-moves">Woooooo!</p>');
-    var button = $('<p class="re-button">Play again!</p>');
+    let html = $('<div class="result"></div>');
+    let info1 = $('<p class="re-won">Congratulations! You Won!</p>');
+    let info2 = $('<p class="re-moves">With&nbsp;'+counter+'&nbsp;Moves&nbsp;&nbsp;,&nbsp;&nbsp;'+second+'&nbsp;seconds&nbsp;&nbsp;and&nbsp;&nbsp;'+startnum+'&nbsp;Stars. </p>');
+    let info3 = $('<p class="re-moves">Woooooo!</p>');
+    let button = $('<p class="re-button">Play again!</p>');
     html.append(info1);
     html.append(info2);
     html.append(info3);
@@ -83,18 +87,19 @@ function addMessage(counter,startnum,second) {
 
 /**
  * @description when the two cards are match, change card's classname and cancel the click event
+ * @param $card
  * @param openCard
  */
-function lockCard(openCard) {
-    var match = [];
+function lockCard($card,openCard) {
+    let match = [];
     $.each(openCard,function (i,data) {
-        $('.card')[data].className = 'card match animated bounce';
+        $card[data].className = 'card match animated bounce';
         match.push(data);
     })
-    $.each($('.card'),function (i) {
+    $.each($card,function (index) {
         for(var j=0;j<match.length;j++) {
             if(i == match[j]){
-                var cancel = $('.card')[i];
+                let cancel = $card[index];
                 $(cancel).unbind("click");
             }
         }
@@ -103,17 +108,18 @@ function lockCard(openCard) {
 
 /**
  * @description when the two cards are not match, display the wrong color and recover the card's classname
+ * @param $card
  * @param openCard
  */
-function removeCard(openCard) {
+function removeCard($card,openCard) {
     $.each(openCard,function (i,data) {
-        $('.card')[data].className = 'card notm animated wobble';
+        $card[data].className = 'card notm animated wobble';
         (function (n) {
             function f() {
                 n.className = 'card';
             }
             setTimeout(f,1500);
-        })($('.card')[data])
+        })($card[data])
     })
 }
 
@@ -122,8 +128,7 @@ function removeCard(openCard) {
  * @param counter
  */
 function displayNum(counter) {
-    $('.moves').text("");
-    $('.moves').append(counter);
+    $('.moves').text("").append(counter);
 }
 
 /**
@@ -137,32 +142,31 @@ function displayStar(counter) {
     }else if(counter>16){
         $('.stars>li:eq(1)').remove();
     }
-    var starnum = $(".stars>li").length;
+    let starnum = $(".stars>li").length;
     return starnum;
 }
 
 /**
- * play function
+ * @description play function
+ * @param $card
  */
-function play() {
-    var openCard = [];//opened card, length is 2
-    var matchlength = [];//all the matched card, length is increase
-    var counter = 0;//counter the pace
-    var startnum;
-    var time = true;
-    var clearid;
-    //bind the click for each li
-    $(".card").bind("click",function () {
+function play($card) {
+    let openCard = [];//opened card, length is 2
+    let matchlength = [];//all the matched card, length is increase
+    let counter = 0;//counter the pace
+    let startnum, clearid, mydate;
+    let time = true;
+    $card.bind("click",function () {
         if(time){
-            var beDate = new Date();
-            console.log(beDate+'定义时');
+            let beDate = new Date();
+            mydate = beDate.getTime();
             clearid=timer(0);
             time = false;
         }
-        var n = $('.card').index(this);
+        let n = $card.index(this);
         openCard.push(n);
         if (openCard[0]!=openCard[1]) {
-            displaySymbol(n);
+            displaySymbol($card,n);
         }else {
             openCard.pop();
         }
@@ -170,7 +174,7 @@ function play() {
             counter += 1;
             displayNum(counter);
             startnum = displayStar(counter);
-            checkMatch(openCard,matchlength,counter,startnum,clearid,beDate);
+            checkMatch(openCard,matchlength,counter,startnum,clearid,mydate,$card);
             openCard.splice(0,openCard.length);
         }
 
@@ -187,9 +191,15 @@ function restart(classname) {
     })
 }
 
+/**
+ * @description setInterval function
+ * @param func
+ * @param wait
+ * @returns {number|*}
+ */
 function interval(func, wait) {
-    var id;
-    var interv = function () {
+    let id;
+    let interv = function () {
         func.call(null);
         id = setTimeout(interv, wait);
     };
@@ -197,24 +207,35 @@ function interval(func, wait) {
     return id;
 }
 
+/**
+ * @description timer
+ * @param i
+ * @returns {number|*}
+ */
 function timer(i) {
-    var id = interval(function () {
+    let id = interval(function () {
         i++;
         $('.time span').text("").append(i);
     },1000);
     return id;
 }
 
+/**
+ * @description timepiece
+ * @param bsDate
+ * @returns {number}
+ */
 function seconds(bsDate) {
-    console.log(bsDate+'传进seconds的参数');
-    var date = new Date();
-    console.log(date+'结束时的时间');
-    var second = Math.floor((bsDate.getTime() - date.getTime())/1000);
-    console.log(second+'计算的秒数是');
+    let date = new Date();
+    let second = Math.floor((date.getTime() - bsDate)/1000);
     return second;
 }
+
+/**
+ * @description main function
+ */
 $(document).ready(function () {
-    var cards_all = [
+    let cards_all = [
         'fa-diamond','fa-diamond',
         'fa-paper-plane-o','fa-paper-plane-o',
         'fa-anchor','fa-anchor',
@@ -225,8 +246,8 @@ $(document).ready(function () {
         'fa-bomb','fa-bomb'
     ];
     cards_all = shuffle(cards_all);
-    addDOM(cards_all);
-    play();
+    let $card = $('.card');
+    addDOM($card,cards_all);
+    play($card);
     restart('.restart');
 });
-
