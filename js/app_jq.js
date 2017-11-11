@@ -77,10 +77,7 @@ function addMessage(counter,startnum,second) {
     let info2 = $('<p class="re-moves">With&nbsp;'+counter+'&nbsp;Moves&nbsp;&nbsp;,&nbsp;&nbsp;'+second+'&nbsp;seconds&nbsp;&nbsp;and&nbsp;&nbsp;'+startnum+'&nbsp;Stars. </p>');
     let info3 = $('<p class="re-moves">Woooooo!</p>');
     let button = $('<p class="re-button">Play again!</p>');
-    html.append(info1);
-    html.append(info2);
-    html.append(info3);
-    html.append(button);
+    html.append(info1,info2,info3,button);
     $(document.body).append(html);
     restart('.re-button');
 }
