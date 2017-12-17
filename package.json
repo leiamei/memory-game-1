@@ -2,42 +2,40 @@
   "name": "memory-game",
   "version": "0.1.0",
   "description": "test",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yangyunhan/memory-game"
-  },
-  "author": {
-    "name": "YhuannY",
-    "email": "1205385190@qq.com"
-  },
-  "license": "ISC",
+  "main": "gulpfile.js",
+  "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-latest": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.18.13",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.1",
-    "gulp-compass": "^2.1.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-copy": "0.0.2",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-less": "^3.3.2",
-    "gulp-livereload": "^3.8.0",
-    "gulp-plumber": "^0.6.6",
-    "gulp-rename": "^1.2.0",
-    "gulp-sass": "^1.3.3",
-    "gulp-sftp": "^0.1.4",
-    "gulp-tinypng": "^1.0.2",
-    "gulp-uglify": "^1.1.0",
-    "gulp-webserver": "^0.9.0",
-    "gulp-zip": "^2.0.3",
-    "imagemin-pngquant": "^4.0.0",
-    "opn": "^1.0.1",
-    "tiny-lr": "^0.1.7"
+    "gulp-babel": "^7.0.0",
+    "gulp-cache": "^1.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-es6-transpiler": "^1.0.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-markdown": "^1.2.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^3.0.0",
+    "imagemin-pngquant": "^5.0.1",
+    "jshint": "^2.9.5",
+    "rename": "^1.0.4"
   },
   "dependencies": {
-    "babel-core": "^6.26.0"
-  },
-  "scripts": {
-    "build": "babel js -d lib"
+    "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-changed": "^3.1.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-filter": "^5.0.0",
+    "gulp-pngquant": "^1.0.10",
+    "gulp-recipe-browsersync-server": "^0.1.5",
+    "gulp-rename": "^1.2.2"
   }
 }
