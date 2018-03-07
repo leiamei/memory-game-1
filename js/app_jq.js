@@ -14,6 +14,15 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
+
+    /*另一种方式洗牌
+    * function shuffle(){
+    *   return Math.random()>0.5?-1:1;
+    * }
+    *
+    * var cards = [];
+    * cards.sort(shuffle)
+    * */
 }
 
 /**
@@ -92,9 +101,9 @@ function lockCard($card,openCard) {
     $.each(openCard,function (i,data) {
         $card[data].className = 'card match animated bounce';
         match.push(data);
-    })
+    });
     $.each($card,function (index) {
-        for(var j=0;j<match.length;j++) {
+        for(let j=0;j<match.length;j++) {
             if(index == match[j]){
                 let cancel = $card[index];
                 $(cancel).unbind("click");
@@ -115,7 +124,7 @@ function removeCard($card,openCard) {
             function f() {
                 n.className = 'card';
             }
-            setTimeout(f,1500);
+            setTimeout(f,1000);
         })($card[data])
     })
 }
@@ -148,9 +157,9 @@ function displayStar(counter) {
  * @param $card
  */
 function play($card) {
-    let openCard = [];//opened card, length is 2
-    let matchlength = [];//all the matched card, length is increase
-    let counter = 0;//counter the pace
+    let openCard = []; //opened card, length is 2
+    let matchlength = []; //all the matched card, length is increase
+    let counter = 0; //counter the pace
     let startnum, clearid, mydate;
     let time = true;
     $card.bind("click",function () {
@@ -184,7 +193,12 @@ function play($card) {
  */
 function restart(classname) {
     $(classname).bind("click",function () {
-        window.location.reload();
+        //不同的刷新页面的方法
+        //window.location.reload();
+        //history.go(0)
+        window.location = location
+        //window.location.assign(location)
+        //window.location.replace(location)
     })
 }
 
@@ -209,12 +223,11 @@ function interval(func, wait) {
  * @param i
  * @returns {number|*}
  */
-function timer(i) {
-    let id = interval(function () {
-        i++;
+function timer(i) {//i是从第几秒开始
+    return interval(function () {
+        i=i+1;//间隔
         $('.time span').text("").append(i);
-    },1000);
-    return id;
+    }, 1000);
 }
 
 /**
