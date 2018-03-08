@@ -1,4 +1,3 @@
-
 /**
  * @description random array
  * @param array
@@ -82,14 +81,13 @@ function checkMatch(openCard,matchlength,counter,startnum,clearid,mydate,$card) 
 function addMessage(counter,startnum,second) {
     $('.container').remove();
 
-    swal('干的漂亮','你点击了按钮','success');
-    /*let html = $('<div class="result"></div>');
+    let html = $('<div class="result"></div>');
     let info1 = $('<p class="re-won">Congratulations! You Won!</p>');
     let info2 = $('<p class="re-moves">With&nbsp;'+counter+'&nbsp;Moves&nbsp;&nbsp;,&nbsp;&nbsp;'+second+'&nbsp;seconds&nbsp;&nbsp;and&nbsp;&nbsp;'+startnum+'&nbsp;Stars. </p>');
     let info3 = $('<p class="re-moves">Woooooo!</p>');
     let button = $('<p class="re-button">Play again!</p>');
     html.append(info1,info2,info3,button);
-    $(document.body).append(html);*/
+    $(document.body).append(html);
 
     restart('.re-button');
 }

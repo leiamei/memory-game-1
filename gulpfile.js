@@ -28,6 +28,7 @@ gulp.task("es6to5", function () {
         .pipe(babel({presets: ['env']}))
         .pipe(gulp.dest("dist/js6"));
 });
+
 //只压缩js代码
 gulp.task('uglify', function () {
     setTimeout(function () {
@@ -99,7 +100,6 @@ gulp.task('watch', function(){
 	gulp.watch('js/*.js', ['scripts']);//gulp.watch('js/*.js', ['lint', 'scripts']);
 	gulp.watch('css/*.css',['css']);
 	gulp.watch('index.html',['htmlmin']);
-	//gulp.watch('scss/*.scss',['sass']);
 });
 
 gulp.task('serve', function(){

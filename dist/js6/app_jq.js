@@ -1,10 +1,10 @@
 'use strict';
+
 /**
  * @description random array
  * @param array
  * @returns {*}
  */
-
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue = void 0,
@@ -17,6 +17,15 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
+
+    /*另一种方式洗牌
+    * function shuffle(){
+    *   return Math.random()>0.5?-1:1;
+    * }
+    *
+    * var cards = [];
+    * cards.sort(shuffle)
+    * */
 }
 
 /**
@@ -75,13 +84,16 @@ function checkMatch(openCard, matchlength, counter, startnum, clearid, mydate, $
  */
 function addMessage(counter, startnum, second) {
     $('.container').remove();
-    var html = $('<div class="result"></div>');
-    var info1 = $('<p class="re-won">Congratulations! You Won!</p>');
-    var info2 = $('<p class="re-moves">With&nbsp;' + counter + '&nbsp;Moves&nbsp;&nbsp;,&nbsp;&nbsp;' + second + '&nbsp;seconds&nbsp;&nbsp;and&nbsp;&nbsp;' + startnum + '&nbsp;Stars. </p>');
-    var info3 = $('<p class="re-moves">Woooooo!</p>');
-    var button = $('<p class="re-button">Play again!</p>');
-    html.append(info1, info2, info3, button);
-    $(document.body).append(html);
+
+    swal('干的漂亮', '你点击了按钮', 'success');
+    /*let html = $('<div class="result"></div>');
+    let info1 = $('<p class="re-won">Congratulations! You Won!</p>');
+    let info2 = $('<p class="re-moves">With&nbsp;'+counter+'&nbsp;Moves&nbsp;&nbsp;,&nbsp;&nbsp;'+second+'&nbsp;seconds&nbsp;&nbsp;and&nbsp;&nbsp;'+startnum+'&nbsp;Stars. </p>');
+    let info3 = $('<p class="re-moves">Woooooo!</p>');
+    let button = $('<p class="re-button">Play again!</p>');
+    html.append(info1,info2,info3,button);
+    $(document.body).append(html);*/
+
     restart('.re-button');
 }
 
@@ -118,7 +130,7 @@ function removeCard($card, openCard) {
             function f() {
                 n.className = 'card';
             }
-            setTimeout(f, 1500);
+            setTimeout(f, 1000);
         })($card[data]);
     });
 }
@@ -188,7 +200,12 @@ function play($card) {
  */
 function restart(classname) {
     $(classname).bind("click", function () {
-        window.location.reload();
+        //不同的刷新页面的方法
+        //window.location.reload();
+        //history.go(0)
+        window.location = location;
+        //window.location.assign(location)
+        //window.location.replace(location)
     });
 }
 
@@ -214,11 +231,11 @@ function interval(func, wait) {
  * @returns {number|*}
  */
 function timer(i) {
-    var id = interval(function () {
-        i++;
+    //i是从第几秒开始
+    return interval(function () {
+        i = i + 1; //间隔
         $('.time span').text("").append(i);
     }, 1000);
-    return id;
 }
 
 /**
