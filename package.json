@@ -36,6 +36,8 @@
     "gulp-filter": "^5.0.0",
     "gulp-pngquant": "^1.0.10",
     "gulp-recipe-browsersync-server": "^0.1.5",
-    "gulp-rename": "^1.2.2"
+    "gulp-rename": "^1.2.2",
+    "marked": "^0.3.17",
+    "npm-upgrade": "^1.3.0"
   }
 }
